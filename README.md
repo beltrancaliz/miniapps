@@ -99,6 +99,16 @@ $ miniapp i login
 以上命令执行后，会依次执行以下步骤：
 1. 从 repo [https://github.com/miniapps-team/minapp-widget-login.git ](https://github.com/miniapps-team/minapp-widget-login.git) 下载。
 2. 拷贝 `minapp-widget-login` repo 中的组件到 `src/pages` 和 `dist/pages` 下。
+
+
+## FAQ
+
+#### 可以自定义组件下载地址吗
+
+可以，自己配置即可
+
+
+
 ### License
 
 [MIT](http://opensource.org/licenses/MIT)
