@@ -8,18 +8,28 @@ var config = require('./config').getConfig();
 function sassCompiler(content, config, file, cb) {
     config.data = content;
     config.file = file;
-    require('node-sass').render(config, function(err, res) {
+    //chang strategy to use user's node-sass
+    var userSassPath = require(process.cwd() + '/node_modules/node-sass');
+    userSassPath.render(config, function(err, res) {
         if (err) {
             console.error(err);
         } else {
-            cb && cb(res.css);
+            if (cb) {
+                var css = res.css;
+                if (typeof css === 'object') {
+                    css = css.toString();
+                }
+                cb(css);
+            }
         }
     });
 }
 
 function stylusCompiler(content, config, file, cb) {
     config.filename = file;
-    require('stylus').render(content, config, function(err, css) {
+    //chang strategy to use user's node-sass
+    var userSassPath = require(process.cwd() + '/node_modules/stylus');
+    userSassPath.render(content, config, function(err, css) {
         if (err) {
             console.error(err);
         } else {

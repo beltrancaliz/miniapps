@@ -1,13 +1,14 @@
 var path = require('path');
 var util = require('./util');
 var cStyle = require('./compile-style');
-var cScript = require('./compile-script')
+var cScript = require('./compile-script');
 var fs = require('fs-extra');
 var gaze = require('gaze');
 var config = require('./config').getConfig();
 var ora = util.ora;
 
 module.exports = {
+    _hasWatched: false,
     build: function(file) {
         var self = this;
         var src = config.src;
@@ -39,8 +40,8 @@ module.exports = {
             }
         });
 
-        if (watch) {
-            self.watch();
+        if (watch && !self._hasWatched) {
+            self._watch();
         }
     },
     compile: function(opath) {
@@ -73,17 +74,49 @@ module.exports = {
                 break
         }
     },
-    watch: function() {
+    _watch: function() {
         var self = this;
         var src = config.src;
+
+        self._hasWatched = true;
 
         console.log('watching files to compile...');
 
         gaze([src + '/**/*'], function() {
-            this.on('all', function(event, filepath) {
-                console.log(filepath + ' was ' + event);
-                self.build(filepath);
-            });
+            this.on('added', wrapper('added'));
+
+            this.on('renamed', wrapper('renamed'));
+
+            this.on('changed', wrapper('changed'));
+
+            this.on('deleted', del);
+
+
+            function wrapper (eventType) {
+                return function (filepath) {
+                    console.log(filepath + ' was ' + eventType);
+                    self.build(filepath);
+                }
+            }
+
+            function del (filepath) {
+                var opath = filepath;
+                var suffixMap = {
+                    '.sass': '.wxss',
+                    '.stylus': '.wxss'
+                }
+                var filepathObj = path.parse(filepath);
+                var ext = filepathObj.ext;
+                var suffix = suffixMap[ext];
+                filepath = filepath.replace(config.src, config.dist);
+
+                if (suffix) {
+                    filepath = filepath.replace(ext, suffix);
+                }
+
+                fs.removeSync(filepath);
+                console.log(opath + ' was ' + 'deleted');
+            }
         });
     }
 }

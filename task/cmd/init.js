@@ -7,6 +7,8 @@ var ora = util.ora;
 
 var glob = require('glob');
 
+var git = require('../../lib/git')
+
 exports.name = 'init';
 exports.usage = '<dir_path>';
 exports.desc = 'init miniapp directory structure';
@@ -26,6 +28,12 @@ exports.run = function initCmd(dirName, projectType) {
     configJSON.projectType = projectType;
     fs.outputJson(configFilePath, configJSON, function(err) {
       if (err) return console.error(err);
+    });
+
+    var json = util.template(distDirPath + '/_package.json', distDirPath + '/package.json', {
+      projectType: projectType,
+      gitName: git.gitname(),
+      projectName: dirName
     });
 
     glob(distDirPath + "/src/**/*.__suffix__", function(er, files) {

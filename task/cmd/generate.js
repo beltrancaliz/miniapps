@@ -5,7 +5,7 @@ var emitter = require('../event');
 var util = require('../util');
 var generate = require('../generate');
 
-exports.name = 'generate';
+exports.name = 'generate|gen';
 exports.usage = '<page>';
 exports.desc = 'generate page directory by <page>';
 

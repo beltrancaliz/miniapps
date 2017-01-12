@@ -6,6 +6,7 @@ var task = require('./task');
 var emitter = require('./task/event');
 var pkg = require('./package.json');
 var version = pkg.version;
+var util = require('./task/util');
 
 var prompt = require('./task/prompt');
 
@@ -47,13 +48,12 @@ miniapp.cli.helpInfo = function() {
         if (cmdInfo && cmdInfo.name) {
 
             var name = require(filepath).name;
-            // name = miniapp.util.pad(name, 16);
 
             var desc = require(filepath).desc;
 
             var usage = require(filepath).usage
 
-            content.push('    ' + name.green + ' ' + usage.green + '    ' + (desc || '').grey);
+            content.push(util.pad('    ' + name.green + ' ' + usage.blue, 60) + (desc || '').grey);
             content.push('');
         }
 
@@ -82,6 +82,8 @@ miniapp.cli.help = function() {
         '    -v, --version       output the version number'.grey,
         '',
         '    -w, --watch         watch files to change'.grey,
+        '',
+        '    -r, --repo          github or gitlab repo url to install'.grey,
         ''
     ];
 

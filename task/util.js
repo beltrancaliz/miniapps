@@ -3,9 +3,56 @@ var path = require('path');
 var mkdirp = require('mkdirp');
 var execSync = require('child_process').execSync;
 var ora = require('ora');
+var _ = require('lodash');
 
 module.exports = {
     ora: ora,
+    pad: function (text, length, options) {
+        var escapecolor, i, invert, j, pad, padlength, ref, ref1;
+        if (options == null) {
+            options = {};
+        }
+        invert = typeof text === 'number';
+        if (invert) {
+            ref = [text, length], length = ref[0], text = ref[1];
+        }
+        if (typeof options === 'string') {
+            options = {
+              char: options
+            };
+        }
+        if (options.char == null) {
+            options.char = ' ';
+        }
+        if (options.strip == null) {
+            options.strip = false;
+        }
+        text = text.toString();
+        pad = '';
+        if (options.colors) {
+            escapecolor = /\x1B\[(?:[0-9]{1,2}(?:;[0-9]{1,2})?)?[m|K]/g;
+            length += text.length - text.replace(escapecolor, '').length;
+        }
+        padlength = length - text.length;
+        if (padlength < 0) {
+            if (options.strip) {
+              if (invert) {
+                return text.substr(length * -1);
+              } else {
+                return text.substr(0, length);
+              }
+            }
+            return text;
+        }
+        for (i = j = 0, ref1 = padlength; 0 <= ref1 ? j < ref1 : j > ref1; i = 0 <= ref1 ? ++j : --j) {
+            pad += options.char;
+        }
+        if (invert) {
+            return pad + text;
+        } else {
+            return text + pad;
+        }
+    },
     copySync: fs.copySync,
     removeSync: function (filesToRemove) {
         fs.removeSync(filesToRemove);
@@ -98,5 +145,27 @@ module.exports = {
             config = require(configFile);
         }
         return config;
+    },
+    template: function (source, destination, data, options) {
+        destination = destination || source;
+
+        var body = this.readFile(source);
+        body = this.engine(body, data, options);
+
+        this.writeFile(destination, body);
+        this.removeSync(source);
+    },
+    engine: function (source, data, options) {
+        source = source.replace(/<%%([^%]+)%>/g, function (m, content) {
+            return '(;>%%<;)' + content + '(;>%<;)';
+        });
+
+        source = _.template(source, null, options)(data);
+
+        source = source
+            .replace(/\(;>%%<;\)/g, '<%')
+            .replace(/\(;>%<;\)/g, '%>');
+
+        return source;
     }
 }

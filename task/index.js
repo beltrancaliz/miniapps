@@ -8,5 +8,6 @@ module.exports = {
   generate: generate,
   gen: generate,
   build: build,
-  install: install
+  install: install,
+  i: install
 }

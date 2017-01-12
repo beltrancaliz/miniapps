@@ -4,7 +4,8 @@ var _defaultConfig = {
   src: 'src',
   dist: 'dist',
   watch: false,
-  pages: 'pages'
+  pages: 'pages',
+  repo: ''
 }
 
 module.exports = {

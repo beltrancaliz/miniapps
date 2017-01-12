@@ -1,11 +1,13 @@
 var nopt = require('nopt');
 var config = require('./task/config');
 var knownOpts = {
-  watch : Boolean
+  watch : Boolean,
+  repo: String
 };
 
 var shortHands = {
-  w : ['--watch']
+  w : ['--watch'],
+  r : ['--repo']
 };
 
 var _argv = nopt(knownOpts, shortHands, process.argv, 2);
