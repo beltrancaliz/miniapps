@@ -21,7 +21,7 @@ var prompts = [{
         value: 'standard'
     }, {
         name: '基于 sass 的项目结构 ',
-        value: 'sass'
+        value: 'scss'
     }, {
         name: '基于 stylus 的项目结构 ',
         value: 'styl'
