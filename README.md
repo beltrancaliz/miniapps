@@ -12,7 +12,7 @@
 
 > miniapp -h
 
-<img src="http://static.galileo.xiaojukeji.com/static/tms/shield/miniapp_help.jpeg" />
+<img src="http://static.galileo.xiaojukeji.com/static/tms/shield/miniapp_cmd_02.jpeg" />
 
 ### 创建小程序项目
 
