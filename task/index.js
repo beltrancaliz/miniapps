@@ -2,6 +2,7 @@ var init = require('./cmd/init');
 var generate = require('./cmd/generate');
 var build = require('./cmd/build');
 var install = require('./cmd/install');
+var doc = require('./cmd/doc');
 
 module.exports = {
   init: init,
@@ -9,5 +10,7 @@ module.exports = {
   gen: generate,
   build: build,
   install: install,
-  i: install
+  i: install,
+  doc: doc,
+  d: doc
 }

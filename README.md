@@ -101,11 +101,20 @@ $ miniapp i login
 2. 拷贝 `minapp-widget-login` repo 中的组件到 `src/pages` 和 `dist/pages` 下。
 
 
+### 打开文档:
+
+该命令可以通过默认浏览器打开微信小程序官方开发文档页面，方便开发者进行相关 API 查询。
+
+``` bash
+$ miniapp doc 
+```
+
+
 ## FAQ
 
-#### 可以自定义组件下载地址吗
+#### 1、可以自定义组件下载地址吗
 
-可以，自己配置即可
+> 可以，自己配置即可
 
 
 
