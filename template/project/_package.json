@@ -1,7 +1,7 @@
 {
   "name": "<%= projectName %>",
   "version": "0.0.1",
-  "description": "",
+  "description": "A webchat app project generate by miniapps",
   "main": "dist/app.js",
   "scripts": {
     "dev": "miniapp build -w",

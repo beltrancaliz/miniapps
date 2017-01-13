@@ -114,9 +114,11 @@ $ miniapp doc
 
 #### 1、可以自定义组件下载地址吗
 
-> 可以，自己配置即可
+可以，自己配置即可，比如我们默认的，执行：
 
+> miniapp i https://github.com/miniapps-team/minapp-widget-login
 
+在 pages 下面会自动出现一个 login 文件夹，而且自动添加到 `app.json`
 
 ### License
 
