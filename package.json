@@ -1,7 +1,7 @@
 {
   "name": "miniapps",
-  "version": "0.8.1",
-  "description": "miniapps",
+  "version": "0.8.2",
+  "description": "A useful tool for developing webchat apps",
   "main": "index.js",
   "scripts": {},
   "bin": {

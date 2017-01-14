@@ -3,6 +3,7 @@ var generate = require('./cmd/generate');
 var build = require('./cmd/build');
 var install = require('./cmd/install');
 var doc = require('./cmd/doc');
+var tool = require('./cmd/tool');
 
 module.exports = {
   init: init,
@@ -12,5 +13,7 @@ module.exports = {
   install: install,
   i: install,
   doc: doc,
-  d: doc
+  d: doc,
+  tool: tool,
+  t: tool
 }

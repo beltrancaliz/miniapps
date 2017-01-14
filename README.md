@@ -14,6 +14,20 @@
 
 <img src="http://static.galileo.xiaojukeji.com/static/tms/shield/miniapp_cmd_02.jpeg" />
 
+
+## 她的贴心之处：
+
+#### 针对新手：
+
+1、自动根据当前开发设备，一个命令即可下载开发者根据
+2、在你需要查看官方 API 文档的时候，也只要一个命令即可打开浏览器直接打开对应页面
+
+
+#### 针对现有的开发开发语言的集成：
+
+1、可以自主地选择创建什么类型的项目，也会自动编译成小程序的特有语法和文件后缀
+
+
 ### 创建小程序项目
 
 执行 init 命令后，可以看到 <project-name> 目录中生成 `src` 和 `dist` 两个文件夹，其中 `src` 为源码目录，`dist`目录为编译 `src` 后生成的目录。dist 目录可用来在小程序开发者工具中打开。
@@ -101,9 +115,18 @@ $ miniapp i login
 2. 拷贝 `minapp-widget-login` repo 中的组件到 `src/pages` 和 `dist/pages` 下。
 
 
-### 打开文档:
+### 打开 API 文档:
 
 该命令可以通过默认浏览器打开微信小程序官方开发文档页面，方便开发者进行相关 API 查询。
+
+``` bash
+$ miniapp doc 
+```
+
+
+### 自动安装开发者工具:
+
+该命令可以通过默认浏览器自动根据系统类型下载对应的微信小程序开发者工具
 
 ``` bash
 $ miniapp doc 
