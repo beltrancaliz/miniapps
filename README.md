@@ -12,7 +12,7 @@
 
 > miniapp -h
 
-<img src="http://static.galileo.xiaojukeji.com/static/tms/shield/miniapp_cmd_02.jpeg" />
+<img src="http://static.galileo.xiaojukeji.com/static/tms/shield/miniapps_03.jpeg" />
 
 
 ## 她的贴心之处：
