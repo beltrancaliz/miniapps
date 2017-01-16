@@ -148,6 +148,12 @@ $ miniapp tool
 
 欢迎提交 issue 
 
+
+## TODO
+
+对老的项目如何兼容工具目录结构（无 src 类）
+
+
 ### License
 
 [MIT](http://opensource.org/licenses/MIT)
