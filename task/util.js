@@ -140,7 +140,7 @@ module.exports = {
         var config;
         var configFile = path.join(this.getCwd(), path.sep, 'miniapp.config.json');
         if (!this.isFile(configFile)) {
-            return null;
+            return {};
         } else {
             config = require(configFile);
         }

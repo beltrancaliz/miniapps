@@ -143,6 +143,11 @@ $ miniapp tool
 
 在 pages 下面会自动出现一个 login 文件夹，而且自动添加到 `app.json`
 
+
+#### 2、遇到问题？
+
+欢迎提交 issue 
+
 ### License
 
 [MIT](http://opensource.org/licenses/MIT)

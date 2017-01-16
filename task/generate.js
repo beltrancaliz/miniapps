@@ -30,7 +30,7 @@ module.exports = function generate(pageName, templateDirPath) {
   }
 
   allowedFileNames.forEach(function (fileName, index) {
-    var projectType = util.getProjConfig().projectType;
+    var projectType = util.getProjConfig().projectType || 'standard';
     var cssType = projectType == 'standard' ? 'wxss' : projectType
     var suffix = path.extname(fileName);
 
