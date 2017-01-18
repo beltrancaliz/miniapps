@@ -6,7 +6,8 @@
 
 > npm i miniapps -g
 
-依赖: [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/).
+* 依赖: [Node.js](https://nodejs.org/en/) and [Git](https://git-scm.com/).
+* 如果是权限错误的话，记得加 sudo
 
 ## 功能
 
