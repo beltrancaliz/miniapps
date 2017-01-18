@@ -10,10 +10,31 @@ module.exports = function generate(pageName, templateDirPath) {
   genSpinner.start();
   var cwdDirPath = process.cwd();
   var pagesDirName = config.getConfig('pages');
+
+  // support old project such as not using our miniapp init
+  var originPagePath = path.join(cwdDirPath, pagesDirName, pageName);
+
   var srcDir = config.getConfig('src');
   var distAppjsonPath = path.join(cwdDirPath, srcDir, 'app.json');
   var distPagesDirPath = path.join(cwdDirPath, srcDir, pagesDirName, pageName);
   templateDirPath = templateDirPath || path.resolve(__dirname, '../template/page');
+
+  // 增加一个逻辑判断是否是 miniapps init 的
+  // support old project such as not using our miniapp init
+  var isInitByUs = true;
+  if (!fs.existsSync(distAppjsonPath)) {
+    isInitByUs = false;
+
+    if (fs.existsSync(originPagePath)) {
+      console.warn('Generate Error。The path was already existed: ' + originPagePath);
+      genSpinner.stop();
+      process.exit(-1);
+    } else {
+      fs.ensureDirSync(originPagePath);
+    }
+  }
+
+
   var allowedFileNames = [
     'index.js',
     'index.json',
@@ -23,7 +44,9 @@ module.exports = function generate(pageName, templateDirPath) {
   var filesLen = allowedFileNames.length;
 
   if (fs.existsSync(distPagesDirPath)) {
-    console.warn('The path was already existed: ' + distPagesDirPath);
+    console.warn('Generate Error。The path was already existed: ' + distPagesDirPath);
+    genSpinner.stop();
+    process.exit(-1);
     return
   } else {
     fs.ensureDirSync(distPagesDirPath);
@@ -37,14 +60,21 @@ module.exports = function generate(pageName, templateDirPath) {
     suffix = suffix.replace('__suffix__', cssType);
 
     var templateFilePath = path.join(templateDirPath, fileName);
-    var distFilePath = path.join(distPagesDirPath, pageName + suffix);
+
+    // support old project such as not using our miniapp init
+    var distFilePath = isInitByUs ? path.join(distPagesDirPath, pageName + suffix): path.join(originPagePath, pageName + suffix);
 
     fs.copy(templateFilePath, distFilePath, function (err) {
       if (err) return console.error(err);
       filesLen--;
 
       if (!filesLen) {
-        success();
+        // support old project such as not using our miniapp init
+        if (isInitByUs) {
+          success();
+        } else {
+          genSpinner.stop();
+        }
       }
     })
   })
