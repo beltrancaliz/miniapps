@@ -49,7 +49,10 @@ module.exports = function generate(pageName, templateDirPath) {
     process.exit(-1);
     return
   } else {
-    fs.ensureDirSync(distPagesDirPath);
+    // no use for old project
+    if (isInitByUs) {
+      fs.ensureDirSync(distPagesDirPath);
+    }
   }
 
   allowedFileNames.forEach(function (fileName, index) {
